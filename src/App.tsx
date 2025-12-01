@@ -1,31 +1,46 @@
-import { useState } from 'react'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import CategoryPage from './pages/Category';
+import ProductPage from './pages/Product';
+import CartPage from './pages/Cart';
+import CheckoutPage from './pages/Checkout';
+import AboutPage from './pages/About';
+import FAQPage from './pages/FAQ';
+import BlogPage from './pages/Blog';
+import ContactPage from './pages/Contact';
+import ShippingPage from './pages/Shipping';
+import PolicyPage from './pages/Policy';
+import { CartProvider } from './context/CartContext';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import './index.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App: React.FC = () => {
   return (
-    <div className='min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 flex items-center justify-center'>
-      <div className='text-center px-4'>
-        <h1 className='text-5xl md:text-6xl font-extrabold text-white mb-6'>
-          Welcome to pettty
-        </h1>
-        <p className='text-lg md:text-xl text-purple-200 mb-8 max-w-2xl mx-auto'>
-          This is your new AI-built playground. Describe your dream UI and Chippy will design and code it for you in real time.
-        </p>
-        <div className='bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl inline-block'>
-          <button
-            onClick={() => setCount((c) => c + 1)}
-            className='px-8 py-4 bg-gradient-to-r from-pink-500 to-violet-500 text-white font-semibold rounded-xl hover:scale-105 hover:shadow-xl transition-all'
-          >
-            Count is {count}
-          </button>
-        </div>
-        <p className='text-purple-300 mt-6 text-sm'>
-          Ask Chippy to turn this into a full product site, dashboard, or portal ✨
-        </p>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/shipping" element={<ShippingPage />} />
+            <Route path="/privacy" element={<PolicyPage />} />
+            <Route path="/terms" element={<PolicyPage />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-    </div>
-  )
-}
+    </CartProvider>
+  );
+};
 
-export default App
+export default App;
